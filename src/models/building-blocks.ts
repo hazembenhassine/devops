@@ -22,12 +22,9 @@ export class BuildingBlocks {
     getCollectedWater(): number {
         // Surface totale d'eau stockée
         let total = 0;
-        // Pour chaque bloc sauf le premier et le dernier
+        // Pour chaque bloc trouver le max à droite et le max à gauche pour déterminer le niveau d'eau
         // Complexité de O(n^2) puisqu'il y a 2 parcours imbriqués du tableau.
-        this.blockSizes.slice(1, -1).forEach((block, i) => {
-            // Obtenir l'index réel du bâtiment courant (Corriger l'offset causé par le slice).
-            const index = i + 1;
-
+        this.blockSizes.forEach((block, index) => {
             // Trouver le maximum à gauche du bâtiment courant.
             // La complexité de cette instruction est O(n) puisque Array.Prototype.reduce() fait un parcours complet du tableau.
             const leftMax = this.blockSizes.slice(0, index + 1).reduce((a,b) => Math.max(a, b), 0);
@@ -75,7 +72,7 @@ export class BuildingBlocks {
         let totalLeft = 0;
         // Parcours du premier sous-tableau
         // O(n)
-        this.blockSizes.slice(undefined, maxIndex).forEach(elm => {
+        this.blockSizes.slice(0, maxIndex).forEach(elm => {
             // Calculer le maximum à gauche actuel
             maxLeft = elm > maxLeft ? elm : maxLeft;
             // Math.min(maxLeft, max) === maxLeft est toujours vraie puisque le maximum actuel est toujours inférieur ou égal au maximum absolu du tableau.
