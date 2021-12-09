@@ -186,57 +186,57 @@ curl -X 'POST' \
 
 ### Simple Cases:
 
-1. Case 1:
-    Preview:
+1. Case 1:<br />
+    Preview:<br />
     <div>
         <img src="images/simple-case-1.png" alt="Simple Case 1" height="240">
     </div>
-    Result:
+    Result:<br />
     <div>
         <img src="images/simple-case-1-result.png" alt="Simple Case 1" height="240">
     </div>
-2. Case 2:
-    Preview:
+2. Case 2:<br />
+    Preview:<br />
     <div>
         <img src="images/simple-case-2.png" alt="Simple Case 2" height="240">
     </div>
-    Result:
+    Result:<br />
     <div>
         <img src="images/simple-case-2-result.png" alt="Simple Case 2" height="240">
     </div>
-3. Case 3:
-    Preview:
+3. Case 3:<br />
+    Preview:<br />
     <div>
         <img src="images/simple-case-3.png" alt="Simple Case 3" height="240">
     </div>
-    Result:
+    Result:<br />
     <div>
         <img src="images/simple-case-3-result.png" alt="Simple Case 3" height="240">
     </div>
  
 ### Complex Cases:
-1. Case 1:
-    Preview:
+1. Case 1:<br />
+    Preview:<br />
     <div>
         <img src="images/complex-case-1.png" alt="Complex Case 1" height="240">
     </div>
-    Result:
+    Result:<br />
     <div>
         <img src="images/complex-case-1-result.png" alt="Complex Case 1" height="240">
     </div>
-2. Case 2:
-    Preview:
+2. Case 2:<br />
+    Preview:<br />
     <div>
         <img src="images/complex-case-2.png" alt="Complex Case 2" height="240">
     </div>
-    Result:
+    Result:<br />
     <div>
         <img src="images/complex-case-2-result.png" alt="Complex Case 2" height="240">
     </div>
     
 ### Edge Cases:
-1. Case 1:
-    Submitting a list that contains one negative number.
+1. Case 1:<br />
+    Submitting a list that contains one negative number.<br />
     Result:
     <div>
         <img src="images/edge-case-1-result.png" alt="Edge Case" height="240">
