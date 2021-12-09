@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { ValidationError } from '../errors/validation';
 import { BuildingHightsDTO } from '../models/building-hights.dto';
 
+/**
+ * Middleware de validation des données d'entrée de la requête POST
+ */
 export const validate = (req: Request, res: Response, next: NextFunction) => {
     const body: BuildingHightsDTO = req.body;
     if (!Array.isArray(body.buildingsHeightList)) {
