@@ -1,7 +1,7 @@
 /**
- * 
+ * Service qui gère le problème algorithmique 
  */
-export class BuildingBlocks {
+export class BuildingBlocksService {
 
     constructor(private _blockSizes: number[]) {}
 

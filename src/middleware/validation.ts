@@ -5,7 +5,7 @@ import { BuildingHightsDTO } from '../models/building-hights.dto';
 /**
  * Middleware de validation des données d'entrée de la requête POST
  */
-export const validate = (req: Request, res: Response, next: NextFunction) => {
+export const validate = (req: Request, res: Response, next: NextFunction): void => {
     const body: BuildingHightsDTO = req.body;
     if (!Array.isArray(body.buildingsHeightList)) {
         throw new ValidationError(`Expected array, found ${typeof body.buildingsHeightList}.`);
