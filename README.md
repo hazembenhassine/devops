@@ -72,7 +72,9 @@
 	        <li><a href="#using-npm">Using npm</a></li>
 		</ul>
     </li>
-    <li><a href="#how-it-works">How it works</a></li>
+    <li>
+        <a href="#how-it-works">How it works</a>
+    </li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -182,38 +184,62 @@ curl -X 'POST' \
 
 1. Case 1:
     Preview:
-    <img src="images/simple-case-1.png" alt="Simple Case 1" width="600">
+    <div>
+        <img src="images/simple-case-1.png" alt="Simple Case 1" height="240">
+    </div>
     Result:
-    <img src="images/simple-case-1-result.png" alt="Simple Case 1" width="400">
+    <div>
+        <img src="images/simple-case-1-result.png" alt="Simple Case 1" height="240">
+    </div>
 2. Case 2:
     Preview:
-    <img src="images/simple-case-2.png" alt="Simple Case 2" width="600">
+    <div>
+        <img src="images/simple-case-2.png" alt="Simple Case 2" height="240">
+    </div>
     Result:
-    <img src="images/simple-case-2-result.png" alt="Simple Case 2" width="400">
+    <div>
+        <img src="images/simple-case-2-result.png" alt="Simple Case 2" height="240">
+    </div>
 3. Case 3:
     Preview:
-    <img src="images/simple-case-3.png" alt="Simple Case 3" width="600">
+    <div>
+        <img src="images/simple-case-3.png" alt="Simple Case 3" height="240">
+    </div>
     Result:
-    <img src="images/simple-case-3-result.png" alt="Simple Case 3" width="400">
+    <div>
+        <img src="images/simple-case-3-result.png" alt="Simple Case 3" height="240">
+    </div>
  
 ### Complex Cases:
 1. Case 1:
     Preview:
-    <img src="images/complex-case-1.png" alt="Complex Case 1" width="600">
+    <div>
+        <img src="images/complex-case-1.png" alt="Complex Case 1" height="240">
+    </div>
     Result:
-    <img src="images/complex-case-1-result.png" alt="Complex Case 1" width="400">
+    <div>
+        <img src="images/complex-case-1-result.png" alt="Complex Case 1" height="240">
+    </div>
 2. Case 2:
     Preview:
-    <img src="images/complex-case-2.png" alt="Complex Case 2" width="600">
+    <div>
+        <img src="images/complex-case-2.png" alt="Complex Case 2" height="240">
+    </div>
     Result:
-    <img src="images/complex-case-2-result.png" alt="Complex Case 2" width="400">
+    <div>
+        <img src="images/complex-case-2-result.png" alt="Complex Case 2" height="240">
+    </div>
     
 ### Edge Cases:
 1. Case 1:
     Preview:
-    <img src="images/edge-case-1.png" alt="Edge Case" width="600">
+    <div>
+        <img src="images/edge-case-1.png" alt="Edge Case" height="240">
+    </div>
     Result:
-    <img src="images/edge-case-1-result.png" alt="Edge Case" width="400">
+    <div>
+        <img src="images/edge-case-1-result.png" alt="Edge Case" height="240">
+    </div>
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -223,10 +249,14 @@ curl -X 'POST' \
 ### How to solve the problem
 
 1. For every building, we need to locate the highest building on its left and its right.
-    <img src="images/how-it-works-1.png" alt="Max left and right" width="600">
+    <div>
+        <img src="images/how-it-works-1.png" alt="Max left and right" height="240">
+    </div>
 
 2. Find the minimum between the highest buildings on the left and right.
-    <img src="images/how-it-works-2.png" alt="Min" width="600">
+    <div>
+        <img src="images/how-it-works-2.png" alt="Min" height="240">
+    </div>
 
 3. Water level is the difference between the result of the last step and the height of the current building.
 
@@ -240,6 +270,7 @@ Solving the problem in this manner gives us a complexity of O(n^2)
 ### How to optimize it
 
 1. Begin by finding the highest building in the list.
+
     <img src="images/optimized-1.png" alt="Min" width="600">
 2. Slice original list into two smaller lists at the index of the highest building.
 3. Iterate left list starting from the left, keeping track of the maximum on the left as you go.
@@ -256,7 +287,7 @@ Solving the problem in this manner gives us a complexity of O(n^2)
 <!-- CONTACT -->
 ## Contact
 
-Your Name - mohamedhazem.benhassine@insat.ucar.tn
+BEN HASSINE Mohamed Hazem - mohamedhazem.benhassine@insat.ucar.tn
 
 Project Link: [https://github.com/hazembenhassine/test_node](https://github.com/hazembenhassine/test_node)
 
