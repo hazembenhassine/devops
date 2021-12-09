@@ -235,10 +235,7 @@ curl -X 'POST' \
     
 ### Edge Cases:
 1. Case 1:
-    Preview:
-    <div>
-        <img src="images/edge-case-1.png" alt="Edge Case" height="240">
-    </div>
+    Submitting a list that contains one negative number.
     Result:
     <div>
         <img src="images/edge-case-1-result.png" alt="Edge Case" height="240">

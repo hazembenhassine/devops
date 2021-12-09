@@ -1,9 +1,26 @@
+import { ValidationError } from "../errors/validation";
+
 /**
  * Service qui gère le problème algorithmique 
  */
 export class BuildingBlocksService {
 
-    constructor(private _blockSizes: number[]) {}
+    constructor(private _blockSizes: number[]) {
+        if (!Array.isArray(_blockSizes)) {
+            throw new ValidationError(`Expected array, found ${typeof _blockSizes}.`);
+        }
+        _blockSizes.forEach((elm) => {
+            if (isNaN(elm)) {
+                throw new ValidationError(`Expected array of numbers, found ${typeof elm}.`);
+            }
+            if (elm < 0) {
+                throw new ValidationError('Numbers must be greater than or equal to 0.');
+            }
+            if (elm === Number.POSITIVE_INFINITY) {
+                throw new ValidationError('Numbers must be finite.');
+            }
+        });
+    }
 
     get blockSizes(): number[] {
         return this._blockSizes;
