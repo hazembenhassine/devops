@@ -74,9 +74,12 @@
     </li>
     <li>
         <a href="#how-it-works">How it works</a>
+        <ul>
+	        <li><a href="#how-to-solve-the-problem">How to solve the problem</a></li>
+	        <li><a href="#how-to-optimize-it">How to optimize it</a></li>
+		</ul>
     </li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
 
