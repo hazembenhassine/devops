@@ -68,8 +68,9 @@
     <li>
 	    <a href="#examples">Examples</a>
 		<ul>
-	        <li><a href="#simple-cases">Using Docker</a></li>
-	        <li><a href="#using-npm">Using npm</a></li>
+	        <li><a href="#simple-cases">Simple Cases</a></li>
+	        <li><a href="#complex-cases">Complex Cases</a></li>
+	        <li><a href="#edge-cases">Edge Cases</a></li>
 		</ul>
     </li>
     <li>
