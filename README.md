@@ -267,7 +267,7 @@ curl -X 'POST' \
 
 5. Rince and repeat for the remaining buildings.
 
-Solving the problem in this manner gives us a complexity of O(n^2)
+Solving the problem in this manner gives us a complexity of O(n^2).
 
 
 ### How to optimize it
@@ -283,6 +283,8 @@ Solving the problem in this manner gives us a complexity of O(n^2)
 5. Increment total
 6. Repeat steps 3, 4 and 5 for the list on the right but by iterating through the list from the right
     <img src="images/optimized-right.gif" alt="Min" width="600">
+
+Using this approach, we get a complexity of O(n).
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
