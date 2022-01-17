@@ -8,8 +8,30 @@ paths:
     post:
       tags:
         - BuildingBlocks
-      summary: Calculates collected water in 2d buildings
+      summary: Calculates collected water in 2d buildings with a complexity of O(n^2)
       operationId: CalculateCollectedWater
+      parameters: []
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BuildingBlocksRequest'
+            example:
+              buildingsHeightList: [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
+        required: true
+      responses:
+        '200':
+          description: ''
+          headers: {}
+      deprecated: false
+      security: []
+  /api/building-blocks/collected-water-optimized:
+    post:
+      tags:
+        - BuildingBlocks
+      summary: Calculates collected water in 2d buildings with a complexity of O(n)
+      operationId: CalculateCollectedWaterOptimized
       parameters: []
       requestBody:
         description: ''

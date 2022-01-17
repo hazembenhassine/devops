@@ -4,11 +4,19 @@ import { BuildingHightsDTO } from "../models/building-hights.dto";
 
 export class BuildingBlocksController {
     
-    getCollectedWater(req: Request, res: Response): void {
+    getCollectedWaterOptimized(req: Request, res: Response): void {
         const body: BuildingHightsDTO = req.body;
         const buildingBlocks = new BuildingBlocksService(body.buildingsHeightList);
         res.status(200).json({
             collectedWater: buildingBlocks.getCollectedWaterOptimized()
+        });
+    }
+
+    getCollectedWater(req: Request, res: Response): void {
+        const body: BuildingHightsDTO = req.body;
+        const buildingBlocks = new BuildingBlocksService(body.buildingsHeightList);
+        res.status(200).json({
+            collectedWater: buildingBlocks.getCollectedWater()
         });
     }
 

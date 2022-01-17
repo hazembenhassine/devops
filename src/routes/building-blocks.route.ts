@@ -8,6 +8,7 @@ export const routeBuildingBlocks = (): Router => {
     const controller: BuildingBlocksController = new BuildingBlocksController();
 
     router.route('/collected-water').post(validate, controller.getCollectedWater);
+    router.route('/collected-water-optimized').post(validate, controller.getCollectedWaterOptimized);
 
     return router;
 }
