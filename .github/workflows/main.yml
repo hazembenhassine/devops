@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 
+        uses: actions/setup-node@v2
+      - name: Install dependencies
+        run: npm ci
+      - run: npm run build --if-present
+      - run: npm test
+
+  build:
+    name: Building and Pushing the Image
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: docker login
+      env:
+        DOCKER_USER: tarekjarrar
+        DOCKER_PASSWORD: azerty123
+      run: |
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+
+    - name: Build, tag, and push image to dockerHub
+      id: build-image
+      env:
+        DockerHub_REGISTRY: hazembenhassine
+        DockerHub_REPOSITORY: test-node
+
+      run: |
+        git_hash=$(git rev-parse --short "$GITHUB_SHA")
+        docker build -t $DockerHub_REGISTRY/$DockerHub_REPOSITORY:${GITHUB_REF##*/}-$git_hash .
+        echo "Pushing image to DockerHub..."
+        docker push $DockerHub_REGISTRY/$DockerHub_REPOSITORY:${GITHUB_REF##*/}-$git_hash
+        
+    - name: Update Version
+      run: |
+          git_hash=$(git rev-parse --short "$GITHUB_SHA")
+          image_tag=$(cat ./charts/values.yaml | grep tag: | awk '{print $2}')
+          sed -i "s/$image_tag/${GITHUB_REF##*/}-$git_hash/" ./charts/values.yaml
+
+          
+    - name: Commit and push changes
+      uses: devops-infra/action-commit-push@v0.3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        commit_message: Version updated
+   
+ 
