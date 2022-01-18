@@ -289,6 +289,7 @@ Using this approach, we get a complexity of O(n).
 
 <!-- Cluster Architecture  -->
 ## Cluster Architecture
+
 	<div>
         	<img src="images/cluster-architecture.png" alt="Min" height="240">
 	</div>
@@ -297,7 +298,9 @@ Using this approach, we get a complexity of O(n).
 ## Contact
 
 BEN HASSINE Mohamed Hazem - mohamedhazem.benhassine@insat.ucar.tn
+
 JARRAR Tarek - tarek.jarrarr@gmail.com 
+
 Project Link: [https://github.com/hazembenhassine/test_node](https://github.com/hazembenhassine/test_node)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
