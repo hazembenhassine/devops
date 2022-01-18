@@ -34,4 +34,14 @@ spec:
           limits:
             cpu: 100m # the CPU limit is defined in milicore (m)
             memory: 100Mi # the Memory is defined in Mebibytes (Mi)
+      - name: prometheus
+        image: hazembenhassine/prom-image
+        imagePullPolicy: Always
+        ports:
+          - name: prometheus
+            containerPort: 9090
+        resources:
+          limits:
+            cpu: 100m # the CPU limit is defined in milicore (m)
+            memory: 100Mi # the Memory is defined in Mebibytes (Mi)
         
