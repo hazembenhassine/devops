@@ -6,7 +6,7 @@ metadata:
   name: test-node
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -32,5 +32,5 @@ spec:
             value: "5000"
         resources:
           limits:
-            cpu: 500m # the CPU limit is defined in milicore (m)
-            memory: 500Mi # the Memory is defined in Mebibytes (Mi)
+            cpu: 100m # the CPU limit is defined in milicore (m)
+            memory: 100Mi # the Memory is defined in Mebibytes (Mi)

@@ -6,12 +6,15 @@ metadata:
   name: test-node
   namespace: default
 spec:
-  replicas: 2
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       run: test-node
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:
@@ -19,7 +22,7 @@ spec:
     spec:
       containers:
       - name: test-node
-        image: "hazembenhassine/test-node:main-70a5ef4"
+        image: "hazembenhassine/test-node:main-0986290"
         imagePullPolicy: Always
         ports:
         - name: web
@@ -29,5 +32,5 @@ spec:
             value: "5000"
         resources:
           limits:
-            cpu: 500m # the CPU limit is defined in milicore (m)
-            memory: 500Mi # the Memory is defined in Mebibytes (Mi)
+            cpu: 100m # the CPU limit is defined in milicore (m)
+            memory: 100Mi # the Memory is defined in Mebibytes (Mi)
