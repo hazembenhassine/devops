@@ -290,9 +290,9 @@ Using this approach, we get a complexity of O(n).
 <!-- Cluster Architecture  -->
 ## Cluster Architecture
 
-	<div>
-        	<img src="images/cluster-architecture.png" alt="Min" height="240">
-	</div>
+<div>
+	<img src="images/cluster-architecture.png" alt="Min" height="240">
+</div>
 
 <!-- CONTACT -->
 ## Contact
