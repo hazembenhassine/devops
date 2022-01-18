@@ -9,7 +9,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
-import { register } from 'prom-client';
+import { register, collectDefaultMetrics } from 'prom-client';
 
 const app: Application = express();
 const router: Router = Router();
@@ -29,6 +29,8 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(YAML.load('./swagger.yaml'
 
 // Préfixe tous les routes par /api
 app.use('/api', router);
+
+collectDefaultMetrics();
 
 app.get('/metrics', async (req, res) => {
   res.set('Content-Type', register.contentType)

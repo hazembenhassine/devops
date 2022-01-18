@@ -5,11 +5,11 @@ import { Counter, Gauge, Histogram } from "prom-client";
  */
 export class BuildingBlocksService {
 
-    executionTime: Counter<string>;
+    executionTime: Gauge<string>;
     callCount: Counter<string>;
 
     constructor() {
-        this.executionTime = new Counter({
+        this.executionTime = new Gauge({
             name: 'building_blocks_execution_time_counter',
             help: 'Metric for building blocks execution time',
             labelNames: ['algorithmType']
@@ -28,8 +28,7 @@ export class BuildingBlocksService {
      * @returns La surface d'eau collectée par les bâtiments
      */
     getCollectedWater(blockSizes: number[]): number {
-        const start = new Date();
-        console.log(start.getTime())
+        const end = this.executionTime.labels({algorithmType: 'normal'}).startTimer();
         // Surface totale d'eau stockée
         let total = 0;
         // Pour chaque bloc trouver le max à droite et le max à gauche pour déterminer le niveau d'eau
@@ -52,9 +51,7 @@ export class BuildingBlocksService {
             // Ajouter la surface d'eau au total
             total += waterSurface;
         });
-        const end = new Date();
-        console.log(end.getTime());
-        this.executionTime.labels({algorithmType: 'normal'}).inc(end.getTime() - start.getTime());
+        end();
         this.callCount.labels({algorithmType: 'normal'}).inc();
         return total;
     }
@@ -77,7 +74,7 @@ export class BuildingBlocksService {
      * @see {@link getCollectedWater}
      */
     getCollectedWaterOptimized(blockSizes: number[]): number {
-        const start = new Date();
+        const end = this.executionTime.labels({algorithmType: 'optimized'}).startTimer();
         // Trouver l'indice de la valeur maximale
         // O(n)
         const maxIndex = blockSizes.reduce((currentMaxIndex, x, i) => x > blockSizes[currentMaxIndex] ? i : currentMaxIndex, 0);
@@ -105,8 +102,7 @@ export class BuildingBlocksService {
             // Math.min(maxRight, max) === maxRight est toujours vraie puisque le maximum actuel est toujours inférieur ou égal au maximum absolu du tableau.
             totalRight += maxRight - elm;
         });
-        // end();
-        this.executionTime.labels({algorithmType: 'optimized'}).inc(new Date().getTime() - start.getTime());
+        end();
         this.callCount.labels({algorithmType: 'optimized'}).inc();
         return totalLeft + totalRight;
     }

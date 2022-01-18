@@ -6,8 +6,13 @@ metadata:
   name: test-node
 spec:
   ports:
-    - port: 80
+    - name: prod
+      port: 80
       protocol: TCP
       targetPort: web
+    - name: prometheus
+      port: 9090
+      protocol: TCP
+      targetPort: prometheus
   selector:
     run: test-node
