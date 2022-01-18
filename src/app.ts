@@ -9,6 +9,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 import morgan from 'morgan';
+import { register } from 'prom-client';
 
 const app: Application = express();
 const router: Router = Router();
@@ -19,10 +20,6 @@ app.use(express.json());
 // Middleware de sécurité 
 app.use(cors());
 app.use(helmet());
-app.use(rateLimit({
-    windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
-  }));
 
 // Middleware de log
 app.use(morgan('tiny'));
@@ -33,7 +30,16 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(YAML.load('./swagger.yaml'
 // Préfixe tous les routes par /api
 app.use('/api', router);
 
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', register.contentType)
+  res.send(await register.metrics());
+})
+
 router.use('/building-blocks', BuildingBlocksRouter());
+router.use(rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+  }));
 
 app.use(handleErrors);
 app.use(handleNotFoundRequest);

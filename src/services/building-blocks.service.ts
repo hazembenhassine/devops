@@ -1,33 +1,24 @@
-import { ValidationError } from "../errors/validation";
+import { Counter, Gauge, Histogram } from "prom-client";
 
 /**
  * Service qui gère le problème algorithmique 
  */
 export class BuildingBlocksService {
 
-    constructor(private _blockSizes: number[]) {
-        if (!Array.isArray(_blockSizes)) {
-            throw new ValidationError(`Expected array, found ${typeof _blockSizes}.`);
-        }
-        _blockSizes.forEach((elm) => {
-            if (isNaN(elm)) {
-                throw new ValidationError(`Expected array of numbers, found ${typeof elm}.`);
-            }
-            if (elm < 0) {
-                throw new ValidationError('Numbers must be greater than or equal to 0.');
-            }
-            if (elm === Number.POSITIVE_INFINITY) {
-                throw new ValidationError('Numbers must be finite.');
-            }
+    executionTime: Counter<string>;
+    callCount: Counter<string>;
+
+    constructor() {
+        this.executionTime = new Counter({
+            name: 'building_blocks_execution_time_counter',
+            help: 'Metric for building blocks execution time',
+            labelNames: ['algorithmType']
+        })
+        this.callCount = new Counter({
+            name: 'building_blocks_call_counter',
+            help: 'Metric for number of calls for normal algorithm',
+            labelNames: ['algorithmType']
         });
-    }
-
-    get blockSizes(): number[] {
-        return this._blockSizes;
-    }
-
-    set blockSizes(blockSizes: number[]) {
-        this._blockSizes = blockSizes;
     }
 
     /**
@@ -36,19 +27,21 @@ export class BuildingBlocksService {
      * Complexité O(n^2).
      * @returns La surface d'eau collectée par les bâtiments
      */
-    getCollectedWater(): number {
+    getCollectedWater(blockSizes: number[]): number {
+        const start = new Date();
+        console.log(start.getTime())
         // Surface totale d'eau stockée
         let total = 0;
         // Pour chaque bloc trouver le max à droite et le max à gauche pour déterminer le niveau d'eau
         // Complexité de O(n^2) puisqu'il y a 2 parcours imbriqués du tableau.
-        this.blockSizes.forEach((block, index) => {
+        blockSizes.forEach((block, index) => {
             // Trouver le maximum à gauche du bâtiment courant.
             // La complexité de cette instruction est O(n) puisque Array.Prototype.reduce() fait un parcours complet du tableau.
-            const leftMax = this.blockSizes.slice(0, index + 1).reduce((a,b) => Math.max(a, b), 0);
+            const leftMax = blockSizes.slice(0, index + 1).reduce((a,b) => Math.max(a, b), 0);
 
             // Trouver le maximum à droite du bâtiment courant.
             // La complexité de cette instruction est O(n) puisque Array.Prototype.reduce() fait un parcours complet du tableau.
-            const rightMax = this.blockSizes.slice(index).reduce((a, b) => Math.max(a, b), 0);
+            const rightMax = blockSizes.slice(index).reduce((a, b) => Math.max(a, b), 0);
 
             // Le niveau d'eau est le minimum entre le bâtiment le plus élevé à gauche et celui à droite.
             const waterLevel = Math.min(leftMax, rightMax);
@@ -59,6 +52,10 @@ export class BuildingBlocksService {
             // Ajouter la surface d'eau au total
             total += waterSurface;
         });
+        const end = new Date();
+        console.log(end.getTime());
+        this.executionTime.labels({algorithmType: 'normal'}).inc(end.getTime() - start.getTime());
+        this.callCount.labels({algorithmType: 'normal'}).inc();
         return total;
     }
 
@@ -79,17 +76,18 @@ export class BuildingBlocksService {
      * @returns La surface d'eau collectée par les bâtiments
      * @see {@link getCollectedWater}
      */
-    getCollectedWaterOptimized(): number {
+    getCollectedWaterOptimized(blockSizes: number[]): number {
+        const start = new Date();
         // Trouver l'indice de la valeur maximale
         // O(n)
-        const maxIndex = this.blockSizes.reduce((currentMaxIndex, x, i) => x > this.blockSizes[currentMaxIndex] ? i : currentMaxIndex, 0);
+        const maxIndex = blockSizes.reduce((currentMaxIndex, x, i) => x > blockSizes[currentMaxIndex] ? i : currentMaxIndex, 0);
         // Valeur maximale à gauche
         let maxLeft = 0;
         // Total du sous-tableau gauche
         let totalLeft = 0;
         // Parcours du premier sous-tableau
         // O(n)
-        this.blockSizes.slice(0, maxIndex).forEach(elm => {
+        blockSizes.slice(0, maxIndex).forEach(elm => {
             // Calculer le maximum à gauche actuel
             maxLeft = elm > maxLeft ? elm : maxLeft;
             // Math.min(maxLeft, max) === maxLeft est toujours vraie puisque le maximum actuel est toujours inférieur ou égal au maximum absolu du tableau.
@@ -101,13 +99,18 @@ export class BuildingBlocksService {
         let totalRight = 0;
         // Parcours du deuxième sous-tableau
         // O(n)
-        this.blockSizes.slice(maxIndex + 1).reverse().forEach(elm => {
+        blockSizes.slice(maxIndex + 1).reverse().forEach(elm => {
             // Calculer le maximum à gauche actuel
             maxRight = elm > maxRight ? elm : maxRight;
             // Math.min(maxRight, max) === maxRight est toujours vraie puisque le maximum actuel est toujours inférieur ou égal au maximum absolu du tableau.
             totalRight += maxRight - elm;
         });
+        // end();
+        this.executionTime.labels({algorithmType: 'optimized'}).inc(new Date().getTime() - start.getTime());
+        this.callCount.labels({algorithmType: 'optimized'}).inc();
         return totalLeft + totalRight;
     }
 
 }
+
+export const service: BuildingBlocksService = new BuildingBlocksService();
