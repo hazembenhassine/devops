@@ -8,7 +8,7 @@ paths:
     post:
       tags:
         - BuildingBlocks
-      summary: Calculates collected water in 2d buildings with a complexity of O(n^2)
+      summary: Calculates collected water in 2d buildings with a complexity of O(nasdasdasdasdasd^2)
       operationId: CalculateCollectedWater
       parameters: []
       requestBody:

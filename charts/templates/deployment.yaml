@@ -7,11 +7,14 @@ metadata:
   namespace: default
 spec:
   replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
   selector:
     matchLabels:
       run: test-node
-  strategy:
-    type: RollingUpdate
   template:
     metadata:
       labels:

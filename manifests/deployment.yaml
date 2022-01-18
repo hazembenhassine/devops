@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - name: test-node
-        image: hazembenhassine/test-node
+        image: "hazembenhassine/test-node:main-70a5ef4"
         imagePullPolicy: Always
         ports:
         - name: web
