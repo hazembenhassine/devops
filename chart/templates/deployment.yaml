@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: test-node
+  name: test-node
+  namespace: default
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      run: test-node
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: test-node
+    spec:
+      containers:
+      - name: test-node
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
+        ports:
+        - name: web
+          containerPort: 5000
+        env:
+          - name: PORT
+            value: "5000"
+        resources:
+          limits:
+            cpu: 500m # the CPU limit is defined in milicore (m)
+            memory: 500Mi # the Memory is defined in Mebibytes (Mi)
